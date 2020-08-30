@@ -12,8 +12,8 @@ async function getData(value){
     .then((res) => {
         return res.json() 
     }).then(function(data){
-        data.map((item,index) => {
-           return ul.innerHTML += `<li class="li li-${index}">${item}</li>` 
+        data.map(item => {
+           return ul.innerHTML += `<li class="li">${item}</li>` 
         })
         const list = document.querySelectorAll('.li');
         [...list].map(item => {
