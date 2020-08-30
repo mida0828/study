@@ -6,14 +6,20 @@ input.addEventListener('keyup', function(e){
     getData(value)
 })
 
-function getData(value){
+async function getData(value){
     ul.innerHTML = ''
-    fetch(`/autocomplete?keyword=${value}`)
+   await fetch(`/autocomplete?keyword=${value}`)
     .then((res) => {
         return res.json() 
     }).then(function(data){
-        data.map(item => {
-           return ul.innerHTML += `<li>${item}</li>` 
+        data.map((item,index) => {
+           return ul.innerHTML += `<li class="li li-${index}">${item}</li>` 
+        })
+        const list = document.querySelectorAll('.li');
+        [...list].map(item => {
+            item.addEventListener('click', function(){ 
+               return  input.value = item.innerHTML
+            })
         })
     }).catch((error) => {
         console.log(error)
